@@ -1,69 +1,54 @@
-class MembersController < ApplicationController
-  before_action :set_member, only: %i[ show edit update destroy ]
+# frozen_string_literal: true
 
-  # GET /members or /members.json
+class MembersController < ApplicationController
+  before_action :set_member, only: %i[show edit update destroy]
+
   def index
     @members = Member.all
   end
 
-  # GET /members/1 or /members/1.json
-  def show
-  end
+  def show; end
 
-  # GET /members/new
   def new
     @member = Member.new
   end
 
-  # GET /members/1/edit
-  def edit
-  end
+  def edit; end
 
-  # POST /members or /members.json
   def create
     @member = Member.new(member_params)
+    @member.current_rank = Member.count + 1
 
-    respond_to do |format|
-      if @member.save
-        format.html { redirect_to @member, notice: "Member was successfully created." }
-        format.json { render :show, status: :created, location: @member }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @member.errors, status: :unprocessable_entity }
-      end
+    if @member.save
+      redirect_to @member, notice: 'Member was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /members/1 or /members/1.json
   def update
-    respond_to do |format|
-      if @member.update(member_params)
-        format.html { redirect_to @member, notice: "Member was successfully updated." }
-        format.json { render :show, status: :ok, location: @member }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @member.errors, status: :unprocessable_entity }
-      end
+    if @member.update(member_params)
+      redirect_to @member, notice: 'Member was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
+      render json: @member.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE /members/1 or /members/1.json
   def destroy
     @member.destroy
-    respond_to do |format|
-      format.html { redirect_to members_url, notice: "Member was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to members_url, notice: 'Member was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_member
-      @member = Member.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def member_params
-      params.require(:member).permit(:name, :surname, :email, :birthday, :games_played, :current_rank)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_member
+    @member = Member.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def member_params
+    params.require(:member).permit(:name, :surname, :email, :birthday, :games_played, :current_rank)
+  end
 end
