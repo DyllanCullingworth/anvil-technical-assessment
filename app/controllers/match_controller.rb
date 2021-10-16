@@ -25,7 +25,7 @@ class MatchController < ApplicationController
     if result == 'draw'
       redirect_to root_path, notice: 'No change draw' and return if rank_difference <= 1
 
-      rank_change(lower_ranked, 1)
+      rank_change_up(lower_ranked, 1)
     end
 
     if result == 'member1_wins'
