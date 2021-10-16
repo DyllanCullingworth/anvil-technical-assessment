@@ -27,7 +27,7 @@
 
       <% @members.each do |member| %>
         <p>
-          <%= member.current_rank %>. <%= member.name %> <%= member.surname %>
+          <%= member.current_rank %>. <%= member.name %> <%= member.surname %> (<%= member.games_played %>)
         </p>
       <% end %>
     </div>

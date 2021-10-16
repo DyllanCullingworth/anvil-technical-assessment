@@ -6,6 +6,10 @@ class MatchController < ApplicationController
   def calculate_rank
     member1 = Member.find(match_params[:member1])
     member2 = Member.find(match_params[:member2])
+
+    member1.update(games_played: member1.games_played += 1)
+    member2.update(games_played: member2.games_played += 1)
+
     result = match_params[:result]
 
     if member1.current_rank < member2.current_rank
