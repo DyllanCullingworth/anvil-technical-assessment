@@ -2,6 +2,22 @@
   <div class="col-8">
     <div class="box">
       <h2>Match up</h2>
+      <%# byebug %>
+      <%= simple_form_for @match, url: match_path, method: :post do |f| %>
+
+        <%= f.error_notification %>
+        <%= f.input :member1, collection: @members, include_blank: false, include_hidden: false %>
+        <%= f.input :member2, collection: @members, include_blank: false, include_hidden: false %>
+        <%= f.input :result, collection: [['Member 1 Won', 'member1_wins'],['Member 2 Won', 'member2_wins'] , ['Draw', 'draw']], include_blank: false, include_hidden: false %>
+
+
+        <div class="form-actions">
+          <%= f.button :submit, class: 'btn btn-success my-2' %>
+        </div>
+
+      <% end %>
+
+
     </div>
   </div>
 
@@ -11,7 +27,7 @@
 
       <% @members.each do |member| %>
         <p>
-          <%= member.current_rank %>. <% member.name %>
+          <%= member.current_rank %>. <%= member.name %> <%= member.surname %>
         </p>
       <% end %>
     </div>
