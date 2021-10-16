@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2021_10_15_161239) do
     t.string "surname"
     t.string "email"
     t.string "birthday"
-    t.integer "games_played"
+    t.integer "games_played", default: 0
     t.integer "current_rank"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

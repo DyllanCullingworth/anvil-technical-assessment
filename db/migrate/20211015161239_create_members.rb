@@ -5,7 +5,7 @@ class CreateMembers < ActiveRecord::Migration[6.1]
       t.string :surname
       t.string :email
       t.string :birthday
-      t.integer :games_played
+      t.integer :games_played, default: 0
       t.integer :current_rank
 
       t.timestamps
