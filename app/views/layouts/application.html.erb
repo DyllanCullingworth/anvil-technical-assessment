@@ -14,9 +14,21 @@
   </head>
 
   <body>
+    <h1 class="text-center">
+      <i class="fas fa-chess-rook"></i>
+      Anvil Chess Club
+      <i class="fas fa-chess-rook"></i>
+    </h1>
 
-    <%= link_to 'Home', root_path %>
-    <%= link_to 'Members', members_path %>
-    <%= yield %>
+    <div class="text-center">
+      <%= link_to 'Home', root_path %>
+      <%= link_to 'Members', members_path %>
+    </div>
+
+    <hr>
+
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

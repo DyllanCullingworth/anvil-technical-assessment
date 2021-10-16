@@ -1,3 +1,5 @@
 class PagesController < ApplicationController
-  def home; end
+  def home
+    @members = Member.all.order(current_rank: :desc)
+  end
 end
