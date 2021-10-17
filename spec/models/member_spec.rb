@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Member, type: :model do
-  subject { Member.new(name: "Dyllan", surname: "Cullingworth", email: "mmdyllan@gmail.com", games_played: 0, current_rank: Member.count + 1)}
+  subject { Member.new(name: "Dyllan", surname: "Cullingworth", email: "mmdyllan@gmail.com", birthday: 26.years.ago, games_played: 0, current_rank: Member.count + 1)}
 
   before { subject.save }
 
