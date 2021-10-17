@@ -21,15 +21,15 @@
     </h1>
 
     <div class="text-center">
-      <%= link_to 'Home', root_path %>
+      <%= link_to 'Home', root_path %> |
       <%= link_to 'Members', members_path %>
     </div>
 
     <hr>
 
-    <p id="notice"><%= notice %></p>
-
     <div class="container">
+      <%= render partial: "layouts/flash_messages" %>
+
       <%= yield %>
     </div>
   </body>

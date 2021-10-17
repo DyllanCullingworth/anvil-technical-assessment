@@ -8,8 +8,8 @@ class MatchController < ApplicationController
     member2 = Member.find(match_params[:member2])
 
     if member1 == member2
-      redirect_to root_path and return
       flash[:notice] = 'Players cannot play against themselves'
+      redirect_to root_path and return
     end
 
     member1.update(games_played: member1.games_played += 1)
