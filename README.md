@@ -1,6 +1,6 @@
 # README
 
-Live demo can be found at:
+Live demo: [Click Here](https://anvil-technical-assessment.herokuapp.com/)
 
 ## Anvil Property Smith Technical Assessment
 ### Chess club administration
