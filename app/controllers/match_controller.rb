@@ -7,6 +7,8 @@ class MatchController < ApplicationController
     member1 = Member.find(match_params[:member1])
     member2 = Member.find(match_params[:member2])
 
+    redirect_to root_path and return if member1 == member2
+
     member1.update(games_played: member1.games_played += 1)
     member2.update(games_played: member2.games_played += 1)
 

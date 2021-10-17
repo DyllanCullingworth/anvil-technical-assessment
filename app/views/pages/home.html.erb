@@ -2,22 +2,29 @@
   <div class="col-8">
     <div class="box">
       <h2>Match up</h2>
-      <%# byebug %>
+
       <%= simple_form_for @match, url: match_path, method: :post do |f| %>
+        <div class="form-inputs">
+          <div class="row">
+            <%= f.error_notification %>
+            <div class="col-md-5">
+              <%= f.input :member1, collection: @members, label_method: :full_name_and_rank, include_blank: false, include_hidden: false %>
+            </div>
 
-        <%= f.error_notification %>
-        <%= f.input :member1, collection: @members, include_blank: false, include_hidden: false %>
-        <%= f.input :member2, collection: @members, include_blank: false, include_hidden: false %>
-        <%= f.input :result, collection: [['Member 1 Won', 'member1_wins'],['Member 2 Won', 'member2_wins'] , ['Draw', 'draw']], include_blank: false, include_hidden: false %>
+            <div class="col-md-2 vs_text">VS</div>
 
+            <div class="col-md-5">
+              <%= f.input :member2, collection: @members, label_method: :full_name_and_rank, include_blank: false, include_hidden: false %>
+            </div>
 
-        <div class="form-actions">
-          <%= f.button :submit, class: 'btn btn-success my-2' %>
+            <%= f.input :result, collection: [['Member 1 Won', 'member1_wins'],['Member 2 Won', 'member2_wins'] , ['Draw', 'draw']], include_blank: false, include_hidden: false %>
+          </div>
         </div>
 
+        <div class="form-actions">
+          <%= f.button :submit, 'Add Match', class: 'btn btn-success my-2' %>
+        </div>
       <% end %>
-
-
     </div>
   </div>
 
@@ -25,11 +32,25 @@
     <div class="box">
       <h2>Leaderboard</h2>
 
-      <% @members.each do |member| %>
-        <p>
-          <%= member.current_rank %>. <%= member.name %> <%= member.surname %> (<%= member.games_played %>)
-        </p>
-      <% end %>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Rank</th>
+            <th scope="col">Name</th>
+            <th scope="col">Games Played</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @members.each do |member| %>
+            <tr>
+              <th scope="row"><%= member.current_rank %></th>
+              <td><%= member.full_name %></td>
+              <td><%= member.games_played %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
