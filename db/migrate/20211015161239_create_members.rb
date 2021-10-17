@@ -4,7 +4,7 @@ class CreateMembers < ActiveRecord::Migration[6.1]
       t.string :name
       t.string :surname
       t.string :email
-      t.string :birthday
+      t.date :birthday
       t.integer :games_played, default: 0
       t.integer :current_rank
 
