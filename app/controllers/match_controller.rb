@@ -7,7 +7,10 @@ class MatchController < ApplicationController
     member1 = Member.find(match_params[:member1])
     member2 = Member.find(match_params[:member2])
 
-    redirect_to root_path and return if member1 == member2
+    if member1 == member2
+      redirect_to root_path and return
+      flash[:notice] = 'Players cannot play against themselves'
+    end
 
     member1.update(games_played: member1.games_played += 1)
     member2.update(games_played: member2.games_played += 1)
@@ -24,27 +27,22 @@ class MatchController < ApplicationController
 
     rank_difference = (member1.current_rank - member2.current_rank).abs
 
+    if result == 'draw' && rank_difference <= 1 ||
+       result == 'member1_wins' && higher_ranked == member1 ||
+       result == 'member2_wins' && higher_ranked == member2
+
+      flash[:notice] = 'No change to ranks'
+      redirect_to root_path and return
+    end
+
     if result == 'draw'
-      redirect_to root_path, notice: 'No change draw' and return if rank_difference <= 1
-
       rank_change_up(lower_ranked, 1)
-    end
-
-    if result == 'member1_wins'
-      redirect_to root_path, notice: 'No change mem 1' and return if higher_ranked == member1
-
+    else
       rank_change_down(higher_ranked)
       rank_change_up(lower_ranked, (rank_difference / 2).round)
     end
 
-    if result == 'member2_wins'
-      redirect_to root_path, notice: 'No change mem 2' and return if higher_ranked == member2
-
-      rank_change_down(higher_ranked)
-      rank_change_up(lower_ranked, (rank_difference / 2).round)
-    end
-
-    flash[:notice] = "Match successfully added"
+    flash[:notice] = 'Match successfully added'
     redirect_to root_path
   end
 
