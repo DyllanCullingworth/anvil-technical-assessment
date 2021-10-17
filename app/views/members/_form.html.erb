@@ -3,13 +3,16 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :surname %>
-    <%= f.input :email %>
-    <%= f.input :birthday %>
+    <div class="row">
+      <div class="col-md-6"><%= f.input :name %></div>
+      <div class="col-md-6"><%= f.input :surname %></div>
+      <div class="col-md-6"><%= f.input :email %></div>
+      <div class="col-md-6"><%= f.input :birthday %></div>
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-actions my-2">
+    <%= f.button :submit, class: 'btn btn-success' %>
+    <%= link_to 'Cancel', :back, class: "btn btn-warning", data: { confirm: 'Are you sure?'} %>
   </div>
 <% end %>
